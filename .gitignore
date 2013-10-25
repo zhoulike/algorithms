@@ -1,3 +1,6 @@
+#dataset
+*.data
+
 *.py[cod]
 
 # C extensions
