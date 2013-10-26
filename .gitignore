@@ -1,5 +1,6 @@
 #dataset
 *.data
+*.out
 
 *.py[cod]
 
