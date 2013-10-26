@@ -4,7 +4,7 @@
 import random
 
 def main():
-    dataset_size = (100, 1000, 10000, 50000, 1000000)
+    dataset_size = (100, 1000, 10000, 50000, 100000)
     data_min = -1000000
     data_max = 1000000
 

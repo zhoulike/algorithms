@@ -125,7 +125,48 @@ class sort():
         self.data_sorted = self.data_unsorted[:]
         _quick_sort(self.data_sorted, 0, self.data_size)
 
+    def heap_sort(self, cmp_func):
+        def left_child(parent):
+            return 2 * parent + 1
 
+        def right_child(parent):
+            return 2 * parent + 2
+
+        def heapfy(a, i, size):
+            largest_i = i
+            #left = left_child(i)
+            left = 2 * i + 1     #a bit faster than function call.
+            if left < size:
+                if cmp(a[largest_i], a[left]) < 0:
+                    largest_i = left
+            #right = right_child(i)
+            right = 2 * i + 2
+            if right < size:
+                if cmp(a[largest_i], a[right]) < 0:
+                    largest_i = right
+
+            if largest_i != i:
+                a[i], a[largest_i] = a[largest_i], a[i]
+                heapfy(a, largest_i, size)
+
+        #initialize
+        self.data_sorted = self.data_unsorted[:]
+        heap_size = self.data_size
+
+        #build heap
+        i = heap_size / 2
+        while i >= 0:
+            heapfy(self.data_sorted, i, heap_size)
+            i -= 1
+
+        #sort
+        while heap_size > 1:
+            self.data_sorted[0], self.data_sorted[heap_size - 1] = \
+                    self.data_sorted[heap_size - 1], self.data_sorted[0]
+            heap_size -= 1
+            heapfy(self.data_sorted, 0, heap_size)
+
+        
 def small2big(a, b):
     return a - b
 
@@ -180,6 +221,15 @@ def main():
     sort_name.append('quick')
     sort_time.append(delta.total_seconds())
     output = sys.argv[2][:dash] + '_quick' +sys.argv[2][dash:]
+    s.write_data(output)
+
+    start = datetime.datetime.now()
+    s.heap_sort(small2big)
+    end = datetime.datetime.now()
+    delta = end - start
+    sort_name.append('heap')
+    sort_time.append(delta.total_seconds())
+    output = sys.argv[2][:dash] + '_heap' +sys.argv[2][dash:]
     s.write_data(output)
 
     print "%8s" % '',
