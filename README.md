@@ -12,3 +12,4 @@ An implementation of different algorithms
 * Merge Sort (Python)
 * Quick Sort (Python)
 * Heap Sort (Python)
+* Shell Sort (Python)

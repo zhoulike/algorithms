@@ -4,6 +4,7 @@
 import sys
 import datetime
 import random
+import math
 
 class sort():
     """A sort class with many different sorting algorithms"""
@@ -26,17 +27,17 @@ class sort():
         fwrite.write('\n'.join(map(str, self.data_sorted)))
         fwrite.close()
 
-    def insertion_sort(self, cmp_func):
-        self.data_sorted = self.data_unsorted[:]
-        i = 1
-        while i < self.data_size:
-            tmp = self.data_sorted[i]
-            j = i
-            while j > 0 and cmp_func(self.data_sorted[j - 1], tmp) > 0:
-                self.data_sorted[j] = self.data_sorted[j - 1]
-                j -= 1
-            self.data_sorted[j] = tmp
-            i += 1
+    #def insertion_sort(self, cmp_func):
+        #self.data_sorted = self.data_unsorted[:]
+        #i = 1
+        #while i < self.data_size:
+            #tmp = self.data_sorted[i]
+            #j = i
+            #while j > 0 and cmp_func(self.data_sorted[j - 1], tmp) > 0:
+                #self.data_sorted[j] = self.data_sorted[j - 1]
+                #j -= 1
+            #self.data_sorted[j] = tmp
+            #i += 1
 
     def bubble_sort(self, cmp_func):
         self.data_sorted = self.data_unsorted[:]
@@ -166,7 +167,79 @@ class sort():
             heap_size -= 1
             heapfy(self.data_sorted, 0, heap_size)
 
+    def _insertion_sort(self, cmp_func, step):
+        i = step
+        while i < self.data_size:
+            tmp = self.data_sorted[i]
+            j = i - step
+            while j >= 0 and cmp_func(self.data_sorted[j], tmp) > 0:
+                self.data_sorted[j + step] = self.data_sorted[j]
+                j -= step
+            self.data_sorted[j + step] = tmp
+            i += 1
+    
+    def insertion_sort(self, cmp_func):
+        self.data_sorted = self.data_unsorted[:]
+        self._insertion_sort(cmp_func, 1)
+
+    def shell_sort(self, cmp_func):
+        def orig_increments(size):
+            incs = []
+            i = size / 2 
+            while i >= 1:
+               incs.append(i) 
+               i /= 2
+            return incs
+
+        def hibbard_increments(size):
+            incs = []
+            k = 1
+            inc = math.pow(2, k) - 1
+            while inc < size:
+                incs.append(int(inc))
+                k += 1
+                inc = math.pow(2, k) - 1
+            incs.reverse()
+            return incs
         
+        def knuth_increments(size):
+            incs = []
+            k = 1
+            inc = (math.pow(3, k) - 1) / 2
+            while inc < size:
+                incs.append(int(inc))
+                k += 1
+                inc = (math.pow(3, k) - 1) / 2
+            incs.reverse()
+            return incs
+        
+        def sedgewick_increments(size):
+            incs = []
+            k = 0
+            while True:
+                inc1 = 9 * (math.pow(4, k) - math.pow(2, k)) + 1
+                if inc1 >= size:
+                    break
+                incs.append(int(inc1))
+                inc2 = math.pow(2, k + 2) * (math.pow(2, k + 2) - 3) + 1
+                if inc2 >= size:
+                    break
+                incs.append(int(inc2))
+                k += 1
+            
+            incs.reverse()
+            return incs
+
+        self.data_sorted = self.data_unsorted[:]
+        #speed: sedgewick > knuth > hibbard > orignal
+        incs = sedgewick_increments(self.data_size)
+        #incs = knuth_increments(self.data_size)
+        #incs = hibbard_increments(self.data_size)
+        #incs = orig_increments(self.data_size)
+        for step in incs:
+            self._insertion_sort(cmp_func, step)
+
+
 def small2big(a, b):
     return a - b
 
@@ -231,6 +304,16 @@ def main():
     sort_time.append(delta.total_seconds())
     output = sys.argv[2][:dash] + '_heap' +sys.argv[2][dash:]
     s.write_data(output)
+
+    start = datetime.datetime.now()
+    s.shell_sort(small2big)
+    end = datetime.datetime.now()
+    delta = end - start
+    sort_name.append('shell')
+    sort_time.append(delta.total_seconds())
+    output = sys.argv[2][:dash] + '_shell' +sys.argv[2][dash:]
+    s.write_data(output)
+
 
     print "%8s" % '',
     for i in sort_name:
