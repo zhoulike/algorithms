@@ -15,3 +15,8 @@ An implementation of different algorithms
 * [Shell Sort](http://en.wikipedia.org/wiki/Shell_sort) ([Python][sort.py])
 
 [sort.py]: https://github.com/zhoulike/algorithms/blob/master/sort/python/sort.py
+
+##### Searching Algorithms
+* [Binary Search](http://en.wikipedia.org/wiki/Binary_search_algorithm) ([Python][binary_search.py])
+
+[binary_search.py]: https://github.com/zhoulike/algorithms/blob/master/search/python/binary_search.py
