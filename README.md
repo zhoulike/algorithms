@@ -18,5 +18,7 @@ An implementation of different algorithms
 
 ##### Searching Algorithms
 * [Binary Search](http://en.wikipedia.org/wiki/Binary_search_algorithm) ([Python][binary_search.py])
+* [Binary Search Tree](http://en.wikipedia.org/wiki/Binary_search_tree) ([C][bs_tree.c])
 
 [binary_search.py]: https://github.com/zhoulike/algorithms/blob/master/search/python/binary_search.py
+[bs_tree.c]: https://github.com/zhoulike/algorithms/blob/master/search/c/bs_tree/bs_tree.c
