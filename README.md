@@ -22,3 +22,6 @@ An implementation of different algorithms
 
 [binary_search.py]: https://github.com/zhoulike/algorithms/blob/master/search/python/binary_search.py
 [bs_tree.c]: https://github.com/zhoulike/algorithms/blob/master/search/c/bs_tree/bs_tree.c
+
+#### Others
+* [Boyer-Moore Majority Vote Algorithm](http://www.cs.utexas.edu/~moore/best-ideas/mjrty/index.html) ([CPP](https://github.com/zhoulike/algorithms/blob/master/chenliren/search_star.cpp))
