@@ -19,9 +19,11 @@ An implementation of different algorithms
 ##### Searching Algorithms
 * [Binary Search](http://en.wikipedia.org/wiki/Binary_search_algorithm) ([Python][binary_search.py])
 * [Binary Search Tree](http://en.wikipedia.org/wiki/Binary_search_tree) ([C][bs_tree.c])
+* [Skip List](http://en.wikipedia.org/wiki/Skip_list) ([c++][skiplist.cpp])
 
 [binary_search.py]: https://github.com/zhoulike/algorithms/blob/master/search/python/binary_search.py
 [bs_tree.c]: https://github.com/zhoulike/algorithms/blob/master/search/c/bs_tree/bs_tree.c
+[skiplist.cpp]: https://github.com/zhoulike/algorithms/blob/master/search/cpp/skiplist/skiplist.cpp
 
 #### Others
 * [Boyer-Moore Majority Vote Algorithm](http://www.cs.utexas.edu/~moore/best-ideas/mjrty/index.html) ([CPP](https://github.com/zhoulike/algorithms/blob/master/chenliren/search_star.cpp))
