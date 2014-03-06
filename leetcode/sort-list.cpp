@@ -9,27 +9,25 @@
 class Solution {
 public:
     ListNode *sortList(ListNode *head) {
-        int count = 0;
-        for (ListNode *tmp = head; tmp != NULL; tmp = tmp->next) 
-            ++count;
-            
-        return mergeSort(head, count);
+        return mergeSort(head);
     }
 
 private:
-    ListNode *mergeSort(ListNode *head, int n) {
-        if (n <= 1)
+    ListNode *mergeSort(ListNode *head) {
+        if (head == NULL || head->next == NULL)
             return head;
         
-        ListNode *tmp = head;
-        for (int i = 1; i < n / 2; ++i)
-            tmp = tmp->next;
+        ListNode *slow = head, *fast = head;
+        while (fast->next && fast->next->next) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
         
-        ListNode *right = tmp->next;
-        tmp->next = NULL;
+        ListNode *right = slow->next;  //slow is the middle node
+        slow->next = NULL;
         
-        head = mergeSort(head, n / 2);
-        right = mergeSort(right, n - n / 2);
+        head = mergeSort(head);
+        right = mergeSort(right);
         
         return merge(head, right);
     }
