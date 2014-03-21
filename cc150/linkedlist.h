@@ -27,6 +27,23 @@ ListNode* createList(int a[], int n)
     return head;
 }
 
+ListNode *copyList(ListNode *head)
+{
+    ListNode *copy = NULL, *prev;
+    while (head) {
+        if (!copy) {
+            copy = new ListNode(head->val);
+            prev = copy;
+        } else {
+            prev->next = new ListNode(head->val);
+            prev = prev->next;
+        }
+        head = head->next;
+    }
+
+    return copy;
+}
+
 void displayList(ListNode *head)
 {
     for (ListNode *tmp = head; tmp != NULL; tmp = tmp->next) {
@@ -43,6 +60,21 @@ void destroyList(ListNode *head)
         delete p;
         p = q;
     }
+}
+
+ListNode* reverseList(ListNode *head)
+{
+    ListNode *prev = NULL, *p = head;
+    while (p) {
+        ListNode *q = p->next;
+        p->next = prev;
+        prev = p;
+        if (q == NULL) 
+            head = p;
+        p = q;
+    }
+
+    return head;
 }
 
 #endif
