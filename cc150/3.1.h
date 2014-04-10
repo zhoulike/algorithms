@@ -16,8 +16,9 @@ public:
     void push(int value);
     int pop();
     bool empty() const;
+    int top() const;
 
-private:
+protected:
     static const int default_size = 128;
     int *data;
     int curr, capacity;
@@ -43,6 +44,12 @@ int stack::pop()
 {
     if (curr > 0)
         return data[--curr];
+}
+
+int stack::top() const
+{
+    if (curr >= 0)
+        return data[curr - 1];
 }
 
 bool stack::empty() const
