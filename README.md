@@ -5,7 +5,7 @@ An implementation of different algorithms
 
 ---
 
-##### Sorting Algorithms
+#### Sorting Algorithms
 * [Insertion Sort](http://en.wikipedia.org/wiki/Insertion_sort) ([Python][sort.py])
 * [Bubble Sort](http://en.wikipedia.org/wiki/Bubble_sort) ([Python][sort.py])
 * [Selection Sort](http://en.wikipedia.org/wiki/Selection_sort) ([Python][sort.py])
@@ -16,7 +16,7 @@ An implementation of different algorithms
 
 [sort.py]: https://github.com/zhoulike/algorithms/blob/master/sort/python/sort.py
 
-##### Searching Algorithms
+#### Searching Algorithms
 * [Binary Search](http://en.wikipedia.org/wiki/Binary_search_algorithm) ([Python][binary_search.py])
 * [Binary Search Tree](http://en.wikipedia.org/wiki/Binary_search_tree) ([C][bs_tree.c])
 * [Skip List](http://en.wikipedia.org/wiki/Skip_list) ([C++][skiplist.cpp])
@@ -28,8 +28,10 @@ An implementation of different algorithms
 #### String Matching
 
 * Naive string search algorithm ([Python][naive.py])
+* [Knuth-Morris-Pratt algorithm](http://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm) ([Python][kmp.py])
 
 [naive.py]: https://github.com/zhoulike/algorithms/blob/master/string-matching/naive.py
+[kmp.py]: https://github.com/zhoulike/algorithms/blob/master/string-matching/kmp.py
 
 #### Mathmatics
 
