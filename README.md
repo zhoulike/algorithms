@@ -25,6 +25,12 @@ An implementation of different algorithms
 [bs_tree.c]: https://github.com/zhoulike/algorithms/blob/master/search/c/bs_tree/bs_tree.c
 [skiplist.cpp]: https://github.com/zhoulike/algorithms/blob/master/search/cpp/skiplist/skiplist.cpp
 
+#### String Matching
+
+* Naive string search algorithm ([Python][naive.py])
+
+[naive.py]: https://github.com/zhoulike/algorithms/blob/master/string-matching/naive.py
+
 #### Mathmatics
 
 * [Square root](http://en.wikipedia.org/wiki/Square_root) ([C++][sqrt.cpp])
