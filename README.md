@@ -25,6 +25,14 @@ An implementation of different algorithms
 [bs_tree.c]: https://github.com/zhoulike/algorithms/blob/master/search/c/bs_tree/bs_tree.c
 [skiplist.cpp]: https://github.com/zhoulike/algorithms/blob/master/search/cpp/skiplist/skiplist.cpp
 
+
+#### Graph
+
+* [Breadth-First Search (BFS)](http://en.wikipedia.org/wiki/Breadth-first_search) ([C++][graph.cc])
+
+[graph.cc]: https://github.com/zhoulike/algorithms/blob/master/graph/graph.cc
+
+
 #### String Matching
 
 * Naive string search algorithm ([Python][naive.py])

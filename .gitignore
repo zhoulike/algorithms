@@ -38,3 +38,10 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+
+#C
+*.o
+
+#executive file
+test
