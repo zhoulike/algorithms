@@ -20,6 +20,7 @@ public:
     void RemoveEdge(int u, int v);
 
     void BFS(int source, void (*visit)(int) = visit_);
+    void DFS(void (*visit)(int) = visit_);
 
 private:
     EdgeType type_;  //undirected or directed
@@ -28,6 +29,12 @@ private:
     //used by BFS
     std::vector<int> bfs_parent;  //parent in the breadth-first tree
     std::vector<int> bfs_distance;  //distance from source node
+
+    //used by DFS
+    std::vector<int> dfs_parent;  //parent in the depth-first forest
+    std::vector<int> dfs_discovered; //timestamp
+    std::vector<int> dfs_finished;  //timestamp
+    void DFS_visit(int source, std::vector<int> &color, int &timestamp, void (*visit)(int) = visit_);
 
     //default visit function: do nothing
     static void visit_(int vertex) {};

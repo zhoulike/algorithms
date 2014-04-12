@@ -33,7 +33,7 @@ void Graph::RemoveEdge(int u, int v)
 void Graph::BFS(int source, void (*visit)(int))
 {
     int vertexs = adj_matrix.size();
-    if (source < 0 ||source >= vertexs)
+    if (vertexs == 0 || source < 0 || source >= vertexs)
         return;
 
     if (bfs_parent.size() != adj_matrix.size()) {
@@ -67,4 +67,44 @@ void Graph::BFS(int source, void (*visit)(int))
 
         color[v] = BLACK;
     }
+}
+
+void Graph::DFS(void (*visit)(int))
+{
+    int vertexs = adj_matrix.size();
+
+    if (dfs_parent.size() != adj_matrix.size()) {
+        dfs_parent.resize(adj_matrix.size());
+        dfs_discovered.resize(adj_matrix.size());
+        dfs_finished.resize(adj_matrix.size());
+    }
+
+    vector<int> color(vertexs, WHITE);
+    for (int i = 0; i < vertexs; ++i)
+        dfs_parent[i] = dfs_discovered[i] = dfs_finished[i] = 0;
+    
+    int timestamp = 0;
+
+    for (int i = 0; i < vertexs; ++i) {
+        if (color[i] == WHITE) {
+            DFS_visit(i, color, timestamp, visit);
+        }
+    } 
+}
+
+void Graph::DFS_visit(int source, vector<int> &color, int &timestamp, void (*visit)(int))
+{
+    color[source] = GRAY;
+    dfs_discovered[source] = ++timestamp;
+    visit(source);
+
+    for (int i = 0; i < adj_matrix[i].size(); ++i) {
+        if (adj_matrix[source][i] && color[i] == WHITE) {
+            dfs_parent[i] = source;
+            DFS_visit(i, color, timestamp, visit);
+        }
+    }    
+
+    color[source] = BLACK;
+    dfs_finished[source] = ++timestamp;
 }
