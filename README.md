@@ -50,3 +50,4 @@ An implementation of different algorithms
 
 #### Others
 * [Boyer-Moore Majority Vote Algorithm](http://www.cs.utexas.edu/~moore/best-ideas/mjrty/index.html) ([C++](https://github.com/zhoulike/algorithms/blob/master/chenliren/search_star.cpp))
+* median and nth-element ([C++](https://github.com/zhoulike/algorithms/blob/master/others/nth-element.cc))
