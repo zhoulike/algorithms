@@ -10,21 +10,18 @@
 class Solution {
 public:
     TreeNode *sortedArrayToBST(vector<int> &num) {
-        return child(num.begin(), num.end());
+        if (num.empty())
+            return nullptr;
+        else
+            return createTree(num, 0, num.size() - 1);
     }
-    
 private:
-    TreeNode *child(vector<int>::iterator first, vector<int>::iterator last)
-    {
-        if (first >= last)
-            return NULL;
-        
-        vector<int>::iterator mid = first + (last - first) / 2;
-        TreeNode *p = new TreeNode(*mid);
-            
-        p->left = child(first, mid);  //note: [first, last)
-        p->right = child(mid + 1, last);
-        
-        return p;
+    TreeNode* createTree(vector<int> &num, int low, int high) {
+        if (low > high)
+            return nullptr;
+        int mid = low + (high - low) / 2;
+        TreeNode* root = new TreeNode(num[mid]);
+        root->left = createTree(num, low, mid - 1);
+        root->right = createTree(num, mid + 1, high);
     }
 };

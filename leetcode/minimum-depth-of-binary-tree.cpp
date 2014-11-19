@@ -22,3 +22,21 @@ public:
             return left == 0? right + 1: left + 1;
     }
 };
+
+class Solution {
+public:
+    int minDepth(TreeNode *root) {
+        if (!root)
+            return 0;
+        else if (!root->left && !root->right)
+            return 1;
+        else {
+            int depth = INT_MAX;
+            if (root->left)
+                depth = 1 + minDepth(root->left);
+            if (root->right)
+                depth = min(depth, 1 + minDepth(root->right));
+            return depth;
+        }
+    }
+};

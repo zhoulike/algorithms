@@ -10,28 +10,22 @@
 class Solution {
 public:
     vector<vector<int> > pathSum(TreeNode *root, int sum) {
-        vector<vector<int> > ans;
-        if (!root)
-            return ans;
-            
         vector<int> path;
-        pathSumRecur(root, sum, ans, path);
+        pathSum(root, sum, path);
         return ans;
     }
 private:
-    void pathSumRecur(TreeNode *root, int remain, vector<vector<int> > &ans, vector<int> &path) {
+    vector<vector<int>> ans;
+    void pathSum(TreeNode *root, int sum, vector<int> &path) {
+        if (!root)
+            return;
         path.push_back(root->val);
-        remain -= root->val;
-        
-        if (!root->left && !root->right && remain == 0)
+        if (!root->left && !root->right && sum == root->val)
             ans.push_back(path);
         else {
-            if (root->left)
-                pathSumRecur(root->left, remain, ans, path);
-            if (root->right)
-                pathSumRecur(root->right, remain, ans, path);
+            pathSum(root->left, sum - root->val, path);
+            pathSum(root->right, sum - root->val, path);
         }
-            
         path.pop_back();
     }
 };

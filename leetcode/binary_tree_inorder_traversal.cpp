@@ -60,3 +60,59 @@ public:
         return ivec;
     }
 };
+
+//with C++11
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode *root) {
+        vector<int> ans;
+        stack<pair<TreeNode*, bool>> stk;
+        if (root)
+            stk.push({root, false});
+
+        while (!stk.empty()) {
+            auto curr = stk.top();
+            stk.pop();
+            auto node_ptr = curr.first;
+            if (!curr.second) { //do not push children
+                if (node_ptr->right)
+                    stk.push({node_ptr->right, false});
+                stk.push({node_ptr, true});
+                if (node_ptr->left)
+                    stk.push({node_ptr->left, false});
+            } else 
+                ans.push_back(node_ptr->val);
+        }
+        return ans;
+    }
+};
+
+//Morris in-order traversal
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode *root) {
+        vector<int> ans;
+
+        auto current = root;
+        while (current) {
+            if (current->left) {
+                auto left = current->left;
+                while (left->right && left->right != current)
+                    left = left->right;
+                if (left->right == current) {  // recover binary tree
+                    left->right = nullptr;
+                    ans.push_back(current->val);
+                    current = current->right;  // go right
+                } else {// make current the right child of the rightmost node of the left subtree
+                    left->right = current;
+                    current = current->left;  // don't forget move left;
+                }
+            } else {
+                ans.push_back(current->val);
+                current = current->right;
+            }
+        }
+
+        return ans;
+    }
+};

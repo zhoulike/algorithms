@@ -48,3 +48,30 @@ public:
         
         return ivec;
     }
+};
+
+//with C++11
+class Solution {
+public:
+    vector<int> postorderTraversal(TreeNode *root) {
+        vector<int> ans;
+        stack<pair<TreeNode*, bool>> stk;
+        if (root)
+            stk.push({root, false});
+
+        while (!stk.empty()) {
+            auto curr = stk.top();
+            stk.pop();
+            auto node_ptr = curr.first;
+            if (!curr.second) { //do not push children
+                stk.push({node_ptr, true});
+                if (node_ptr->right)
+                    stk.push({node_ptr->right, false});
+                if (node_ptr->left)
+                    stk.push({node_ptr->left, false});
+            } else 
+                ans.push_back(node_ptr->val);
+        }
+        return ans;
+    }
+};

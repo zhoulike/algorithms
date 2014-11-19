@@ -31,36 +31,40 @@ private:
     }
 };
 
-//bottom-up solution: O(n) time, O(1) space
+//bottom-up solution: O(n) time, O(h) space
 class Solution {
 public:
     bool isValidBST(TreeNode *root) {
-        int child_min = INT_MAX, child_max = INT_MIN;
-        return solve(root, child_min, child_max);
+        if (!root)
+            return true;
+        int tmp1, tmp2;
+        return isValidBST(root, tmp1, tmp2);
     }
 private:
-    bool solve(TreeNode *root, int &child_min, int &child_max) {
-        if (!root) {
-            child_min = INT_MAX;
-            child_max = INT_MIN;
+    bool isValidBST(TreeNode *root, int &lower_bound, int &upper_bound) {
+        lower_bound = upper_bound = root->val;
+        if (!root->left && !root->right)
             return true;
+        if (root->left) {
+            int left_lower, left_upper;
+            bool isLeftValid = isValidBST(root->left, left_lower, left_upper);
+            if (!isLeftValid || root->val <= left_upper)
+                return false;
+            lower_bound = left_lower;
+            upper_bound = root->val;
         }
-        
-        int left_min, left_max;
-        if (solve(root->left, left_min, left_max) == false || root->val <= left_max)
-            return false;
-        child_min = min(root->val, left_min);
-        
-        int right_min, right_max;
-        if (solve(root->right, right_min, right_max) == false || root->val >= right_min)
-            return false;
-        child_max = max(root->val, right_max);
-        
+        if (root->right) {
+            int right_lower, right_upper;
+            bool isRightValid = isValidBST(root->right, right_lower, right_upper);
+            if (!isRightValid || right_lower <= upper_bound)
+                return false;
+            upper_bound = right_upper;
+        }
         return true;
     }
 };
 
-//top-down solution: O(n) time, O(1) space
+//top-down solution: O(n) time, O(h) space
 //simpler and better!!
 class Solution {
 public:
@@ -71,11 +75,15 @@ private:
     bool solve(TreeNode *root, int min_val, int max_val) {
         if (!root)
             return true;
+        //corner case: {INT_MIN, INT_MIN}
+        else if (root->val == INT_MAX && max_val == INT_MAX && root->right ||
+                root->val == INT_MIN && min_val == INT_MIN && root->left)
+            return false;
         else if (root->val < min_val || root->val > max_val)
             return false;
         else
             return solve(root->left, min_val, root->val - 1) &&
-                   solve(root->right, root->val + 1, max_val);
+                solve(root->right, root->val + 1, max_val);
 
     }
 };

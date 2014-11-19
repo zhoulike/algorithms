@@ -40,17 +40,14 @@ After calling your function, the tree should look like:
 class Solution {
 public:
     void connect(TreeLinkNode *root) {
-        TreeLinkNode *leftmost, *tmp = NULL;
-        leftmost = root;
-        
-        while(leftmost && leftmost->left){
-            tmp = leftmost;
-            while(tmp){
-                tmp->left->next = tmp->right;
-                tmp->right->next = tmp->next? tmp->next->left: NULL;
-                tmp = tmp->next;
+        auto leftmost = root;
+        while (leftmost && leftmost->left) {
+            auto curr = leftmost;
+            while (curr) {
+                curr->left->next = curr->right;
+                curr->right->next = curr->next? curr->next->left: nullptr;
+                curr = curr->next;
             }
-            
             leftmost = leftmost->left;
         }
     }

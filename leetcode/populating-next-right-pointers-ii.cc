@@ -32,26 +32,28 @@ After calling your function, the tree should look like:
 class Solution {
 public:
     void connect(TreeLinkNode *root) {
-        TreeLinkNode *leftmost, *tmp1, *tmp2 = NULL;
-        leftmost = root;
-        
-        while(leftmost){
-            tmp1 = leftmost;
-            tmp2 = leftmost = NULL;
-            while(tmp1){
-                if(tmp1->left){
-                    if(!leftmost)
-                        tmp2 = leftmost = tmp1->left;
-                    else
-                        tmp2 = tmp2->next = tmp1->left;
+        auto leftmost = root;
+        while (leftmost) {
+            TreeLinkNode *prev = nullptr, *parent = leftmost;
+            leftmost = nullptr;
+            while (parent) {
+                if (parent->left) {
+                    if (!leftmost)
+                        prev = leftmost = parent->left;
+                    else {
+                        prev->next = parent->left;
+                        prev = prev->next;
+                    }
                 }
-                if(tmp1->right){
-                    if(!leftmost) 
-                        tmp2 = leftmost = tmp1->right;
-                    else
-                        tmp2 = tmp2->next = tmp1->right;
+                if (parent->right) {
+                    if (!leftmost)
+                        prev = leftmost = parent->right;
+                    else {
+                        prev->next = parent->right;
+                        prev = prev->next;
+                    }
                 }
-                tmp1 = tmp1->next;
+                parent = parent->next;
             }
         }
     }

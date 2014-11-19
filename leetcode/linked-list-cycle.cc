@@ -16,10 +16,20 @@ Can you solve it without using extra space?
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        while(head &&  head->next && head->next->next){
-            if(head == head->next)
+        auto slow = head, fast = head;
+        while (fast && fast->next) {
+            slow = slow->next;
+            fast = fast->next->next;
+            if (slow == fast)
                 return true;
-            head->next->next = head->next->next->next;
+        }
+        return false;
+    }
+    bool hasCycle2(ListNode *head) {
+        while (head && head->next) {
+            if (head == head->next) //don't forget to check head != nullptr
+                return true;
+            head->next = head->next->next;
             head = head->next;
         }
         return false;

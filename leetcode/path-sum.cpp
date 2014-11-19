@@ -10,15 +10,12 @@
 class Solution {
 public:
     bool hasPathSum(TreeNode *root, int sum) {
-        return pathSumIter(root, sum, 0);
-    }
-private:
-    bool pathSumIter(TreeNode *root, int sum, int temp_sum) {
-        if(!root)
+        if (!root)
             return false;
-        else if(!root->left && !root->right && root->val + temp_sum == sum)
+        else if (root->val == sum && !root->left && !root->right)
             return true;
-        else
-            return pathSumIter(root->left, sum, root->val + temp_sum) || pathSumIter(root->right, sum, root->val + temp_sum);
+        else 
+            return hasPathSum(root->left, sum - root->val) ||
+                   hasPathSum(root->right, sum - root->val);
     }
 };

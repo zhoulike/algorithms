@@ -51,3 +51,36 @@ public:
         return v;
     }
 };
+
+class Solution2 {
+public:
+    vector<vector<int> > levelOrder(TreeNode *root) {
+        vector<vector<int>> ans;
+        if (root) {
+            queue<TreeNode*> q;
+            TreeNode *sentinel = new TreeNode(0);
+            vector<int> this_line;
+            q.push(root);
+            q.push(sentinel);
+            while (!q.empty()) {
+                auto curr = q.front();
+                q.pop();
+                if (curr == sentinel) {
+                    if (!this_line.empty()) {
+                        ans.push_back(this_line);
+                        this_line.clear();
+                    }
+                    if (!q.empty())
+                        q.push(sentinel);
+                } else {
+                    this_line.push_back(curr->val);
+                    if (curr->left)
+                        q.push(curr->left);
+                    if (curr->right)
+                        q.push(curr->right);
+                }
+            }
+        }
+        return ans;
+    }
+};

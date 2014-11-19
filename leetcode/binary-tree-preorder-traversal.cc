@@ -28,23 +28,20 @@ Note: Recursive solution is trivial, could you do it iteratively?
 class Solution {
 public:
     vector<int> preorderTraversal(TreeNode *root) {
-        std::stack<TreeNode*> s;
-        std::vector<int> ivec;
-        
-        if(root)
-            s.push(root);
-        
-        while(!s.empty()){
-            TreeNode *node = s.top();
-            s.pop();
-            ivec.push_back(node->val);
-            
-            if(node->right)
-                s.push(node->right);
-            if(node->left)
-                s.push(node->left);
+        vector<int> ans;
+        stack<TreeNode*> stk;
+        if (root)
+            stk.push(root);
+
+        while (!stk.empty()) {
+            auto curr = stk.top();
+            stk.pop();
+            ans.push_back(curr->val);
+            if (curr->right)
+                stk.push(curr->right);
+            if (curr->left)
+                stk.push(curr->left);
         }
-        
-        return ivec;
+        return ans;
     }
 };
