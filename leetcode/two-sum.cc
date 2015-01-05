@@ -1,3 +1,4 @@
+//time: O(nlogn), space: O(n)
 class Solution {
 public:
     vector<int> twoSum(vector<int> &numbers, int target) {
@@ -34,5 +35,22 @@ private:
                 high = mid - 1;
         }
         return -1;
+    }
+};
+
+//time: O(n), space: O(1)
+class Solution {
+public:
+    vector<int> twoSum(vector<int> &numbers, int target) {
+        unordered_map<int, int> hash_table;
+        vector<int> ans;
+        for (int i = 0; i < numbers.size(); ++i) {
+            if (hash_table.find(target - numbers[i]) != hash_table.end()) {
+                ans.push_back(hash_table[target - numbers[i]] + 1);
+                ans.push_back(i + 1);
+                return ans;
+            }
+            hash_table[numbers[i]] = i;
+        }
     }
 };
